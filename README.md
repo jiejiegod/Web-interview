@@ -99,7 +99,7 @@ function throttle(fn, wait) {
 ` JSON.parse(JSON.stringify())`
 
 # 什么是JS事件循环
-1. JavaScript 是一门单线程语言，异步操作都是放到事件循环队列里面，等待主执行栈来执行的，等主线程中任务全部完成后，再回来把异步队列中任务放到主程序中运行，这样反复的循环
+1. JavaScript处理异步操作的机制，异步操作都是放到事件循环队列里面，等待主执行栈来执行的，等主线程中任务全部完成后，再回来把异步队列中任务放到主程序中运行，这样反复的循环
 2. 同步任务>微任务>宏任务
 
 # 微任务和宏任务
@@ -164,13 +164,22 @@ vue2采用的是Object.defineProperty()，vue3采用的是ES6原生的Proxy实�
 # vue2的双向绑定原理
 采用数据劫持结合发布者-订阅者模式的方式，通过Object.defineProperty()来劫持各个属性的setter和getter，在数据变动时发布消息给订阅者，触发相应的监听回调
 
-# 组件间传参的方式
+# vue2组件间传参的方式
 1. props 父传子
 2. $emit 子传父
 3. vuex
 4. eventBus事件总线、\$parent和\$children
 5. localStorage、sessionStorage 使用缓存传参
 6. $refs
+
+# vue3组件间传参的方式
+1. props 父传子
+2. emits 子传父
+3. expose/ref 父传子
+4. v-model 子传父
+5. provide/inject 祖先传后代
+6. 总线bus/vuex/pinia
+7. 插槽
 
 # vue路由传参的方式
 1. query 传参用的是path 路径中显示参数
@@ -245,7 +254,7 @@ react和vue大体上是相同的，比如都使用虚拟DOM高效的更新视图
 3. React和Vue.js之间最大的区别在于模板的实现方式。react推荐把模板和逻辑写在一起，而vue推荐把模板和逻辑分离。
 
 # cookie localstroge  sessionstroge的区别
-1. cookie：存储在客户端，大小4kb，有过期时间
+1. cookie：一般浏览器生成，存储在本地，大小4kb，有过期时间
 2. localstroge：存储在本地，大小5M，永久存储，
 3. sessionstroge：存储在本地，大小5M，关闭浏览器就会清除，
    
@@ -254,7 +263,7 @@ MVC：Model-View-Controller，模型-视图-控制器， <br>他确实做到了M
 
 MVP：Model-View-Presenter，模型-视图-展示器，<br> 他解决了两者的耦合问题，但是缺点就是各种交互操作都在Presenter层，太臃肿了，难以维护
 
-MVVM：Model-View-ViewModel，模型-视图-视图模型， <br>他不仅解决了耦合问题，还减少了大量代码和DOM操作，就比如我们在以前的模式上修改代码，我们需要做很多DOM操作来映射，但是现在我们有数据响应式，我们不需要关心怎么映射到视图，只需要修改数据就可以了，数据改变之后我们有虚拟DOM，有diff算法高效判断最小差异，在减少操作的同时还可以优化性能，代码维护起来也很简单
+MVVM：Model-View-ViewModel，模型-视图-视图模型， <br>一种用于构建用户界面的软件架构模式，他不仅解决了耦合问题，还减少了大量代码和DOM操作，就比如我们在以前的模式上修改代码，我们需要做很多DOM操作来映射，但是现在我们有数据响应式，我们不需要关心怎么映射到视图，只需要修改数据就可以了，数据改变之后我们有虚拟DOM，有diff算法高效判断最小差异，在减少操作的同时还可以优化性能，代码维护起来也很简单
 
 # vue的mixins
 就是混合嘛，他可以复用组件内的方法，但是他有一个缺陷就是他的优先级会比较高一点，会造成命名冲突，我们在Vue3中用Composition API11里的hook就没有这个问题 
